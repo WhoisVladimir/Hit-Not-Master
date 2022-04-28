@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class Gameplay : MonoBehaviour
 {
@@ -35,15 +36,47 @@ public class Gameplay : MonoBehaviour
             await charController.StartMovingAsync(waypoints[i].position, cancellationToken);
             Debug.Log($"Point {i} is reached.");
 
-            await Task.Delay(2000, cancellationToken);
+            await StartFightAsync(cancellationToken);
         }
 
     }
 
-    //private async Task
+    private async UniTask StartFightAsync(CancellationToken cancellationToken)
+    {
+        var layer = LayerMask.GetMask("Enemy");
+        var enemies = Physics.OverlapSphere(player.transform.position, 10, layer);
+        Debug.Log($"Enemies count: {enemies.Length}");
+
+        var enemiesCount = enemies.Length;
+
+        var enemyLogic = new EnemyController[enemiesCount];
+        var observedTasks = new UniTask[enemiesCount];
+
+        for (int i = 0; i < enemiesCount; i++)
+        {
+            Debug.Log($"Loop {i}");
+            enemyLogic[i] = enemies[i].GetComponent<EnemyController>();
+            var tempIndex = i;
+            observedTasks[tempIndex] = UniTask.WaitWhile(() => enemyLogic[tempIndex].Health > 0, PlayerLoopTiming.Update, cancellationToken);
+        }
+
+        charController.SwitchFightStatus(true);
+
+        await UniTask.WhenAll(observedTasks);
+        charController.SwitchFightStatus(false);
+    }
 
     private void OnDestroy()
     {
         cancellationTokenSource.Cancel();
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(player.transform.position, 10);
+    }
+#endif
+
 }
