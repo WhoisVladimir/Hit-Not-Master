@@ -9,6 +9,7 @@ public class CharController : MonoBehaviour
     private delegate bool InputAction(int num);
     private InputAction inputAction;
 
+    [SerializeField] private ObjectPool projectilePool;
     [SerializeField] private GameObject shotPoint;
     [SerializeField] private GameObject projectile;
     private NavMeshAgent agent;
@@ -41,6 +42,7 @@ public class CharController : MonoBehaviour
     {
         if (inputAction(0) && isFight) AimShoot();
     }
+
     public void SwitchFightStatus(bool isFight)
     {
         this.isFight = isFight;
@@ -60,7 +62,7 @@ public class CharController : MonoBehaviour
 
         var targetDirection = (targetPosition - shotPoint.transform.position).normalized;
         var instancePos = shotPoint.transform.position;
-        var proj = Instantiate(projectile, instancePos, Quaternion.Euler(Vector3.up * -90));
+        var proj = projectilePool.GetProjectile(projectile, instancePos);
         var projectileCtrl = proj.GetComponent<ProjectileController>();
         projectileCtrl.Shoot(targetDirection);
 
@@ -72,4 +74,5 @@ public class CharController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawRay(shotPoint.transform.position, testPoint);
     }
+
 }

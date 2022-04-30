@@ -38,7 +38,6 @@ public class Gameplay : MonoBehaviour
 
             await StartFightAsync(cancellationToken);
         }
-
     }
 
     private async UniTask StartFightAsync(CancellationToken cancellationToken)
@@ -54,7 +53,6 @@ public class Gameplay : MonoBehaviour
 
         for (int i = 0; i < enemiesCount; i++)
         {
-            Debug.Log($"Loop {i}");
             enemyLogic[i] = enemies[i].GetComponent<EnemyController>();
             var tempIndex = i;
             observedTasks[tempIndex] = UniTask.WaitWhile(() => enemyLogic[tempIndex].Health > 0, PlayerLoopTiming.Update, cancellationToken);
