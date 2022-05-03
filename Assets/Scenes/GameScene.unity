@@ -1235,7 +1235,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022321750}
-  m_LocalRotation: {x: 0.071807, y: -0.711259, z: 0.073446214, w: 0.6953848}
+  m_LocalRotation: {x: 0.07180701, y: -0.7112591, z: 0.07344621, w: 0.69538474}
   m_LocalPosition: {x: 30.869999, y: 4.79, z: 0.36000103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePool: {fileID: 265040650}
   shotPoint: {fileID: 1153788612}
-  projectile: {fileID: 1591165099382186, guid: cbc254a1250664a49832c5f7572deb51, type: 3}
+  projectile: {fileID: 1810322394264667777, guid: ce792f489ce8b334ea5dfc19ba9ad7c5, type: 3}
 --- !u!4 &1524699247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4111819248598986, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
@@ -2413,7 +2413,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739647452}
-  m_LocalRotation: {x: 0.071807, y: -0.711259, z: 0.073446214, w: 0.6953848}
+  m_LocalRotation: {x: 0.07180701, y: -0.7112591, z: 0.07344621, w: 0.69538474}
   m_LocalPosition: {x: 30.869999, y: 4.79, z: 0.36000103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

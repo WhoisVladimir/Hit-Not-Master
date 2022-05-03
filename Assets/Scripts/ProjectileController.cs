@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Rigidbody massCenterRb;
     [SerializeField] private float speed = 1f;
     [SerializeField] private int damage = 1;
     private Vector3 direction;
@@ -18,7 +18,7 @@ public class ProjectileController : MonoBehaviour
     {
         if (isShoot) 
         {
-            rb.AddForce(direction * speed, ForceMode.Impulse);
+            massCenterRb.AddForce(direction * speed, ForceMode.Impulse);
             if (gameObject.activeInHierarchy)
             {
                 var distance = Vector3.Distance(startPoint, transform.position);
@@ -33,9 +33,7 @@ public class ProjectileController : MonoBehaviour
 
     public void Shoot(Vector3 direction)
     {
-        Debug.Log("Shoot.");
-        
-        rb.useGravity = false;
+        massCenterRb.useGravity = false;
         this.direction = direction;
         isShoot = true;
         startPoint = transform.position;
@@ -43,20 +41,16 @@ public class ProjectileController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision");
         if(collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Environment"))
         {
             isShoot = false;
-            rb.useGravity = true;
+            massCenterRb.useGravity = true;
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        rb.velocity = Vector3.zero;
+        massCenterRb.velocity = Vector3.zero;
     }
 }

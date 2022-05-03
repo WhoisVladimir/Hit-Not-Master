@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23772146215185756}
   - component: {fileID: 64063659448232732}
   - component: {fileID: -3950716802462026697}
-  - component: {fileID: 5404579226363855314}
   m_Layer: 0
   m_Name: Coin_01
   m_TagString: Damaging
@@ -114,17 +113,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5404579226363855314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591165099382186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc89443364589ae4286c70616fcd3922, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: -3950716802462026697}
-  speed: 0.5
